@@ -7,7 +7,7 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 
 def alpha_numeric_validator(value: str):
-    if value != slugify(value):
+    if value.lower() != slugify(value):
         raise ValidationError('Ensure this value contains only letters, numbers, and underscore')
 
 
