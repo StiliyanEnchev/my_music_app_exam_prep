@@ -1,6 +1,6 @@
 from django import forms
 
-from albums.mixins import PlaceholderMixin
+from my_music_app_exam_prep.mixins import PlaceholderMixin, ReadOnlyMixin
 from albums.models import Album
 
 
@@ -18,6 +18,6 @@ class AlbumEditForm(PlaceholderMixin, AlbumBaseForm):
     pass
 
 
-class AlbumDeleteForm(AlbumBaseForm):
-    pass
+class AlbumDeleteForm(ReadOnlyMixin, AlbumBaseForm):
+    read_only_fields = ['album_name', 'artist', 'genre', 'price', 'description']
 
