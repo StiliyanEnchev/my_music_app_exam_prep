@@ -7,7 +7,7 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 
 def alpha_numeric_validator(value: str):
-    if value.lower() != slugify(value):
+    if value.lower() != slugify(value) or '-' in value:
         raise ValidationError('Ensure this value contains only letters, numbers, and underscore')
 
 
@@ -15,9 +15,11 @@ class Profile(models.Model):
 
     username = models.CharField(
         max_length=15,
-        validators=[MinLengthValidator(2),
-                    alpha_numeric_validator],
-    )
+        validators=[
+            MinLengthValidator(2),
+            alpha_numeric_validator,
+        ]
+                                )
 
     email = models.EmailField()
 
